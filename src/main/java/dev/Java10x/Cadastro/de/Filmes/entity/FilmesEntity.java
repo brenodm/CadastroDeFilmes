@@ -2,6 +2,8 @@ package dev.Java10x.Cadastro.de.Filmes.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_filmes")
 public class FilmesEntity {
@@ -10,13 +12,15 @@ public class FilmesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String categoria;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaEntity categoria;
     private Double nota;
 
     public FilmesEntity() {
     }
 
-    public FilmesEntity(Long id, String nome, String categoria, Double nota) {
+    public FilmesEntity(Long id, String nome, CategoriaEntity categoria, Double nota) {
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
